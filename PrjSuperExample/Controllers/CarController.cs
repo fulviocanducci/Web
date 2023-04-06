@@ -13,14 +13,14 @@ namespace PrjSuperExample.Controllers
          _repository = repository ?? throw new ArgumentNullException(nameof(repository));
          _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
       }
-      
+
       public async Task<ActionResult> Index(int? current)
       {
          var page = await _repository.PageAsync(o => o.Name, current ?? 1);
          return View(page);
       }
 
-      public async Task<ActionResult> Details(int id)
+      public async Task<ActionResult> Details(long id)
       {
          Car? model = await _repository.FirstOrDefaultAsync(id);
          if (model != null)
@@ -55,7 +55,7 @@ namespace PrjSuperExample.Controllers
          }
       }
 
-      public async Task<ActionResult> Edit(int id)
+      public async Task<ActionResult> Edit(long id)
       {
          Car? model = await _repository.FirstOrDefaultAsync(id);
          if (model != null)
@@ -75,6 +75,7 @@ namespace PrjSuperExample.Controllers
             {
                _repository.Update(model);
                await _unitOfWork.CommitAsync();
+               return RedirectToAction(nameof(Edit), new { model.Id });
             }
             return RedirectToAction(nameof(Index));
          }
@@ -84,7 +85,7 @@ namespace PrjSuperExample.Controllers
          }
       }
 
-      public async Task<ActionResult> Delete(int id)
+      public async Task<ActionResult> Delete(long id)
       {
          Car? model = await _repository.FirstOrDefaultAsync(id);
          if (model != null)
@@ -97,7 +98,7 @@ namespace PrjSuperExample.Controllers
       [HttpPost]
       [ActionName("Delete")]
       [ValidateAntiForgeryToken]
-      public async Task<ActionResult> DeleteModel(int id)
+      public async Task<ActionResult> DeleteModel(long id)
       {
          try
          {

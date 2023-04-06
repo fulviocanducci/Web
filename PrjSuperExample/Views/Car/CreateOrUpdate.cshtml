@@ -17,14 +17,12 @@
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
          </div>
-         <div class="form-group">
-            <input type="submit" value="@(Model == null ? "Inserir": "Alterar")" class="btn btn-primary btn-sm" />
+         <div class="form-group mt-2 mb-2">
+            <input type="submit" value="@(Model == null ? "Inserir": "Alterar")" class="btn btn-primary btn-sm" /> | 
+            <a asp-action="Index" class="btn btn-secondary btn-sm">Voltar</a>
          </div>
       </form>
    </div>
-</div>
-<div>
-   <a asp-action="Index">Voltar</a>
 </div>
 @section Scripts {
    @{

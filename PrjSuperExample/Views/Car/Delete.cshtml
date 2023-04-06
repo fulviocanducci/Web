@@ -1,0 +1,28 @@
+﻿@model Models.Car
+@{
+    ViewData["Title"] = "Carro - Exclusão";
+}
+<h1>Carro - Exclusão</h1>
+<h3>Deseja remover esse carro?</h3>
+<div>
+    <h4>Car</h4>
+    <hr />
+   <dl class="row mb-2">
+        <dt class = "col-sm-2">
+            Id
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            Nome
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>    
+    <form asp-action="Delete">
+        <input type="submit" value="Excluir" class="btn btn-danger btn-sm" /> |
+        <a asp-action="Index" class="btn btn-secondary btn-sm">Voltar</a>
+    </form>
+</div>

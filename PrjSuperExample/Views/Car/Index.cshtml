@@ -22,31 +22,34 @@
       @foreach (var item in Model)
       {
          <tr>
-            <td>
+            <td class="col-2">
                @Html.DisplayFor(modelItem => item.Id)
             </td>
-            <td>
+            <td class="col-7">
                @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-               @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-               @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-               @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            <td class="col-3">
+               @Html.ActionLink("Alterar", "Edit", new { id = item.Id }, new {@class="btn btn-success btn-sm"}) |
+               @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new {@class="btn btn-primary btn-sm"}) |
+               @Html.ActionLink("Excluir?", "Delete", new { id = item.Id }, new {@class="btn btn-danger btn-sm"})
             </td>
          </tr>
       }
    </tbody>
 </table>
-<div>
-   <pagination pagination-asp-action="Index"
+@if (Model.HasNextPage || Model.HasPreviousPage)
+{
+   <div>
+      <pagination pagination-asp-action="Index"
                pagination-asp-controller="Home"
-               pagination-style="PreviousNext"
-               pagination-css-class-ul="pagination"
+               pagination-style="NumbersWithPreviousNext"
+               pagination-css-class-ul="pagination justify-content-center"
                pagination-paginated="Model"
-               pagination-label-next="Next"
-               pagination-label-previous="Previous"
+               pagination-label-next="Próximo"
+               pagination-label-previous="Anterior"
                pagination-css-class-anchor="page-link"
                pagination-css-class-li="page-item"
                pagination-css-class-li-disabled="disabled">
-   </pagination>
-</div>
+      </pagination>
+   </div>
+}
