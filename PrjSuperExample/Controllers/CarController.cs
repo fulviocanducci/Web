@@ -14,9 +14,12 @@ namespace PrjSuperExample.Controllers
          _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
       }
 
-      public async Task<ActionResult> Index(int? current)
+      public async Task<ActionResult> Index(int? current, string? filter = null)
       {
-         var page = await _repository.PageAsync(o => o.Name, current ?? 1);
+         var page = string.IsNullOrEmpty(filter)
+            ? await _repository.PageAsync(o => o.Name, current ?? 1 , 5)
+            : await _repository.PageAsync(o => o.Name, x => x.Name.Contains(filter), current ?? 1, 5);
+         ViewBag.Filter = filter;
          return View(page);
       }
 

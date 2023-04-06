@@ -3,8 +3,17 @@
    ViewData["Title"] = "Lista de Carros";
 }
 <h1>Lista de Carros</h1>
+<p class="justify-content-center text-center">
+   <a asp-action="Create" class="btn btn-primary btn-sm">Novo</a>
+</p>
 <p>
-   <a asp-action="Create">Novo</a>
+   <form asp-action="Index" method="get">
+      <label class="form-label mb-0">Pesquisar: </label> 
+      <div class="input-group">
+         <input type="text" name="filter" id="filter" value="@(ViewBag?.Filter ?? "")" class="form-control form-control-sm" autofocus/>
+         <button class="btn btn-primary btn-sm">Filtrar</button>
+      </div>
+   </form>
 </p>
 <table class="table table-sm">
    <thead>
@@ -41,7 +50,7 @@
 {
    <div>
       <pagination pagination-asp-action="Index"
-               pagination-asp-controller="Home"
+               pagination-asp-controller="Car"
                pagination-style="NumbersWithPreviousNext"
                pagination-css-class-ul="pagination justify-content-center"
                pagination-paginated="Model"
@@ -49,7 +58,8 @@
                pagination-label-previous="Anterior"
                pagination-css-class-anchor="page-link"
                pagination-css-class-li="page-item"
-               pagination-css-class-li-disabled="disabled">
+               pagination-css-class-li-disabled="disabled"
+               pagination-asp-route-filter="@(ViewBag?.Filter ?? "")">
       </pagination>
    </div>
 }
