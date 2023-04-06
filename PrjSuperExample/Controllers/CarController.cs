@@ -13,24 +13,7 @@ namespace PrjSuperExample.Controllers
          _repository = repository ?? throw new ArgumentNullException(nameof(repository));
          _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
       }
-
-      #region Routines
-      protected async Task<Car?> GetCarByIdAsync(int id)
-      {
-         return await _repository.FirstOrDefaultAsync(id);
-      }
-
-      protected async Task<ActionResult> GetCarViewAsync(int id)
-      {
-         var model = await GetCarByIdAsync(id);
-         if (model != null)
-         {
-            return View(model);
-         }
-         return RedirectToAction(nameof(Index));
-      }
-      #endregion
-
+      
       public async Task<ActionResult> Index(int? current)
       {
          var page = await _repository.PageAsync(o => o.Name, current ?? 1);
@@ -39,12 +22,17 @@ namespace PrjSuperExample.Controllers
 
       public async Task<ActionResult> Details(int id)
       {
-         return await GetCarViewAsync(id);
+         Car? model = await _repository.FirstOrDefaultAsync(id);
+         if (model != null)
+         {
+            return View(model);
+         }
+         return RedirectToAction(nameof(Index));
       }
 
       public ActionResult Create()
       {
-         return View();
+         return View("CreateOrUpdate");
       }
 
       [HttpPost]
@@ -69,7 +57,12 @@ namespace PrjSuperExample.Controllers
 
       public async Task<ActionResult> Edit(int id)
       {
-         return await GetCarViewAsync(id);
+         Car? model = await _repository.FirstOrDefaultAsync(id);
+         if (model != null)
+         {
+            return View("CreateOrUpdate", model);
+         }
+         return RedirectToAction(nameof(Index));
       }
 
       [HttpPost]
@@ -93,7 +86,12 @@ namespace PrjSuperExample.Controllers
 
       public async Task<ActionResult> Delete(int id)
       {
-         return await GetCarViewAsync(id);
+         Car? model = await _repository.FirstOrDefaultAsync(id);
+         if (model != null)
+         {
+            return View(model);
+         }
+         return RedirectToAction(nameof(Index));
       }
 
       [HttpPost]
