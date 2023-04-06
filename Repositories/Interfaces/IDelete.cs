@@ -6,5 +6,6 @@ namespace Repositories.Interfaces
    {
       void Delete(T model);
       void Delete(IEnumerable<T> models);
+      void Delete<TKey>(TKey value);
    }
 }

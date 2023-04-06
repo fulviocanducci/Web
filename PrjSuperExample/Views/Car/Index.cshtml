@@ -1,0 +1,52 @@
+﻿﻿@model Canducci.Pagination.Paginated<Models.Car>
+@{
+   ViewData["Title"] = "Lista de Carros";
+}
+<h1>Lista de Carros</h1>
+<p>
+   <a asp-action="Create">Novo</a>
+</p>
+<table class="table table-sm">
+   <thead>
+      <tr>
+         <th class="text-center">
+            Id
+         </th>
+         <th class="text-center">
+            Nome
+         </th>
+         <th class="text-center"></th>
+      </tr>
+   </thead>
+   <tbody>
+      @foreach (var item in Model)
+      {
+         <tr>
+            <td>
+               @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+               @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+               @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+               @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+         </tr>
+      }
+   </tbody>
+</table>
+<div>
+   <pagination pagination-asp-action="Index"
+               pagination-asp-controller="Home"
+               pagination-style="PreviousNext"
+               pagination-css-class-ul="pagination"
+               pagination-paginated="Model"
+               pagination-label-next="Next"
+               pagination-label-previous="Previous"
+               pagination-css-class-anchor="page-link"
+               pagination-css-class-li="page-item"
+               pagination-css-class-li-disabled="disabled">
+   </pagination>
+</div>

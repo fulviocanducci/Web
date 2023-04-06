@@ -33,6 +33,15 @@ namespace Repositories
          _context.Car.RemoveRange(models);
       }
 
+      public void Delete<TKey>(TKey value)
+      {
+         Car? model = _context.Car.Find(value);
+         if (model != null)
+         {
+            _context.Car.Remove(model);
+         }
+      }
+
       public Car? FirstOrDefault(params object[] keys)
       {
          return _context.Car.Find(keys);
@@ -53,7 +62,7 @@ namespace Repositories
          await _context.Car.AddAsync(Model);
       }
 
-      public Paginated<Car> Page<TKey>(int pageNumber, int pageSize = 10)
+      public Paginated<Car> Page(int pageNumber, int pageSize = 10)
       {
          return _context.Car.ToPaginated(pageNumber, pageSize);
       }
@@ -68,7 +77,7 @@ namespace Repositories
          return _context.Car.Where(where).OrderBy(orderBy).ToPaginated(pageNumber, pageSize);
       }
 
-      public Task<Paginated<Car>> PageAsync<TKey>(int pageNumber, int pageSize = 10)
+      public Task<Paginated<Car>> PageAsync(int pageNumber, int pageSize = 10)
       {
          return _context.Car.ToPaginatedAsync(pageNumber, pageSize);
       }

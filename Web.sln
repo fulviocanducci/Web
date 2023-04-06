@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrjSuperExample", "PrjSuperExample\PrjSuperExample.csproj", "{231A5BDB-B52E-426C-9931-FF3784776D2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrjSuperExample", "PrjSuperExample\PrjSuperExample.csproj", "{231A5BDB-B52E-426C-9931-FF3784776D2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{B6BC3ED0-42BB-4787-A841-DF079D91B2B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{B6BC3ED0-42BB-4787-A841-DF079D91B2B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{6352B90B-3C6A-47F3-BD87-4B3505B50179}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{6352B90B-3C6A-47F3-BD87-4B3505B50179}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
