@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Models.Validations;
 namespace Models
 {
    public class Car
@@ -6,7 +7,8 @@ namespace Models
       public long Id { get; set; }
 
       [Required(ErrorMessage = "Digite o nome do carro")]
-      [MaxLength(100)]
+      [StringLength(100, MinimumLength = 1)]
+      [Trim(ErrorMessage = "Espaço inválido")]
       public string Name { get; set; } = string.Empty;
    }
 }

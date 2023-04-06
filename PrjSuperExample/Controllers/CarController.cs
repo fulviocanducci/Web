@@ -45,13 +45,14 @@ namespace PrjSuperExample.Controllers
             {
                _repository.Insert(model);
                await _unitOfWork.CommitAsync();
+               TempData["PageStatusSuccess"] = "Gravado com sucesso";
                return RedirectToAction(nameof(Edit), new { model.Id });
             }
-            return RedirectToAction(nameof(Index));
+            return View("CreateOrUpdate", model);
          }
          catch
          {
-            return View(model);
+            return View("CreateOrUpdate", model);
          }
       }
 
@@ -60,6 +61,10 @@ namespace PrjSuperExample.Controllers
          Car? model = await _repository.FirstOrDefaultAsync(id);
          if (model != null)
          {
+            if (TempData.TryGetValue("PageStatusSuccess", out object? value))
+            {
+               ViewData["PageStatusSuccess"] = value;
+            }
             return View("CreateOrUpdate", model);
          }
          return RedirectToAction(nameof(Index));
@@ -75,13 +80,14 @@ namespace PrjSuperExample.Controllers
             {
                _repository.Update(model);
                await _unitOfWork.CommitAsync();
+               TempData["PageStatusSuccess"] = "Alterado com sucesso";
                return RedirectToAction(nameof(Edit), new { model.Id });
             }
-            return RedirectToAction(nameof(Index));
+            return View("CreateOrUpdate", model);
          }
          catch
          {
-            return View(model);
+            return View("CreateOrUpdate", model);
          }
       }
 
