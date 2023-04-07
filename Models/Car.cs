@@ -9,6 +9,7 @@ namespace Models
       [Required(ErrorMessage = "Digite o nome do carro")]
       [StringLength(100, MinimumLength = 1)]
       [Trim(ErrorMessage = "Espaço inválido")]
+      [Display(Name = "Nome do carro")]
       public string Name { get; set; } = string.Empty;
    }
 }
