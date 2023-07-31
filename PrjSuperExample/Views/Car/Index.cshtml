@@ -34,10 +34,10 @@
             <td class="col-2 text-end">
                @Html.DisplayFor(modelItem => item.Id)
             </td>
-            <td class="col-7 text-start">
+            <td class="col-6 text-start">
                @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td class="col-3 text-center">
+            <td class="col-4 text-center">
                @Html.ActionLink("Alterar", "Edit", new { id = item.Id }, new {@class="btn btn-success btn-sm"}) |
                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new {@class="btn btn-primary btn-sm"}) |
                @Html.ActionLink("Excluir?", "Delete", new { id = item.Id }, new {@class="btn btn-danger btn-sm"}) |
