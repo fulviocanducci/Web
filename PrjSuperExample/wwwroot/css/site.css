@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+label.is-invalid {
+   color: red;
+}
+
+label.error {
+   color: red;
+}

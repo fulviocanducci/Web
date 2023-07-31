@@ -17,10 +17,46 @@ namespace PrjSuperExample.Controllers
       public async Task<ActionResult> Index(int? current, string? filter = null)
       {
          var page = string.IsNullOrEmpty(filter)
-            ? await _repository.PageAsync(o => o.Name, current ?? 1 , 5)
+            ? await _repository.PageAsync(o => o.Name, current ?? 1, 5)
             : await _repository.PageAsync(o => o.Name, x => x.Name.Contains(filter), current ?? 1, 5);
          ViewBag.Filter = filter;
          return View(page);
+      }
+
+      [HttpPost]
+      public async Task<ActionResult> AddOrUpdate(Car car)
+      {
+         try
+         {
+            if (ModelState.IsValid)
+            {
+               if (car.Id == 0)
+               {
+                  _repository.Insert(car);
+               }
+               else if (car.Id > 0)
+               {
+                  _repository.Update(car);
+               }
+               await _unitOfWork.CommitAsync();
+               return Ok(car);
+            }
+            return BadRequest(car);
+         }
+         catch (Exception)
+         {
+            throw;
+         }
+      }
+
+      public async Task<JsonResult> Load(long id)
+      {
+         Car? model = await _repository.FirstOrDefaultAsync(id);
+         if (model != null)
+         {
+            return Json(model);
+         }
+         return Json(null);
       }
 
       public async Task<ActionResult> Details(long id)
